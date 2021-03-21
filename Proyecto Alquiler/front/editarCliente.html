@@ -1,0 +1,54 @@
+
+<html>
+  
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <!--<link rel="stylesheet" href="css/normalize.css">!-->
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}" type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/inicio.css') }}" type='text/css'>
+</head>
+
+<body  id="contenedor">
+  <div>
+    <ol  id="listas">
+    <li><a href="/registroU">Registrar usuario</a></li>
+    <li><a>Registrar Sala nueva</a></li>
+    <li><a>Listar Salas</a></li>
+    <li><a href="/listC">Listar Clientes</a></li>
+   <li><a>Reservar Sala </a></li>
+    </ol>
+</div>
+  <form action="/upd{{ ci }}" method="POST">
+  
+    <h1>Editar Cliente:{{ nombre }}</h1>
+    
+    <fieldset>
+      <legend><span class="number">1</span>Ingrese los datos:</legend>
+      
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" name="user_name"  value="{{ nombre }}" required>
+      
+      
+      
+      <label for="password">Apellido:</label>
+      <input type="text" id="apellido" name="user_apellido"  value="{{ apellido }}" class="input_field" required>
+      <label for="mail">CI:</label>
+      <input type="text" id="ci" name="ci" value="{{ci}}" required>
+      <label for="mail">Numero:</label>
+      <input type="text" id="numero" name="numero" value="{{ numero }}">
+      <label for="mail">Direccion:</label>
+      <input type="text" id="direccion" name="direccion" value="{{ direccion}}">
+      <label for="mail">Correo:</label>
+      <input type="email" id="mail" name="user_email" value="{{ correo }}">
+            
+    </fieldset>
+    
+    <button type="submit">Guardar</button>
+    
+  </form>
+  
+</body>
+</html>

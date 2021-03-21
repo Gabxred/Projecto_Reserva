@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/inicio.css') }}" type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+    <title>Inicio</title>
 </head>
-<body>
-    <li>
-        <a href="/registroU">Registrar usuario</a>
-        <a>Registrar Sala nuevo</a>
-        <a>listar Salas</a>
-        <a>listar Clientes</a>
-        <a>Reservar Sala </a>
-    </li>
+<body id="contenedor">
+    <div id="fon">
+        <ol  id="listas">
+        <li><a href="/registroU">Registrar usuario</a></li>
+        <li><a  >Registrar Sala nueva</a></li>
+        <li><a>Listar Salas</a></li>
+        <li><a href="/listC">Listar Clientes</a></li>
+       <li><a>Reservar Sala </a></li>
+        </ol>
+    </div>
+    
 </body>
 </html>

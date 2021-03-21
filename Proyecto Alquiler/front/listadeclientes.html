@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/inicio.css') }}" type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}" type='text/css'>
+    <title>Lista de Clientes</title>
+</head>
+<body id="contenedor">
+    <div >
+        <ol  id="listas">
+        <li><a href="/registroU">Registrar usuario</a></li>
+        <li><a>Registrar Sala nueva</a></li>
+        <li><a>Listar Salas</a></li>
+        <li><a href="/listC">Listar Clientes</a></li>
+       <li><a>Reservar Sala </a></li>
+        </ol>
+    </div>
+    <h1>Lista de Clientes</h1>
+    
+    <table>
+        <tr>
+              
+            <th>Codigo</th>
+            <th>Nombre</th>
+        
+            <th>Apellido</th>
+        
+            <th>CI</th>
+            <th>Numero</th>
+            <th>Direccion</th>
+            <th>Correo</th>
+            
+        
+        </tr>
+        <tbody>
+            {% for data in datos %}
+        
+            <tr>
+            <td>  {{ data.cod_usuario }}</td>
+        
+            <td>  {{ data.nombre }}</td>
+        
+            <td>  {{ data.apellido }}</td>
+        
+            <td>  {{ data.ci }}</td>
+            <td> {{ data.numero }}</td>
+            <td>  {{ data.direccion }}</td>
+            <td> {{ data.correo }}</td>
+            <td>
+              <a href="/upd{{data.ci}}" method="GET">Editar</a>
+              <a href="/elim{{data.ci}}"onclick="return confirm('Estas seguro de borrar este producto?');">Borrar</a>
+            </td>
+           
+            </tr>
+          {% endfor %}
+    </table>
+    
+</body>
+</html>

@@ -18,19 +18,20 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 
 
 db = SQLAlchemy(app)
-
+db.configure_mappers()
 
 #index el inicio de todo
 @app.route('/' )
 def index():
    
     
-    return render_template("index.html", usuario="eje", usuario2="")
-
+    return render_template("index.html")
+#rutaregistrocliente
 @app.route('/registroU')
 def prueba():
     return render_template("registroCliente.html")
 
+#Guardado Cliente nuevo
 @app.route('/saveU',  methods=["POST"])
 def nuevUs():
     nombre=request.form.get("user_name")
@@ -42,20 +43,44 @@ def nuevUs():
     nuevo=usuario(nombre=nombre,apellido=apellido,ci=ci,correo=correo,direccion=direccion,numero=numero)
     db.session.add(nuevo)
     db.session.commit()
-    return render_template("listadeclientes.html")
+    return redirect(url_for('listC'))
 
+
+#listado de clientes
+@app.route('/listC', methods=["GET"])
+def listC():
+    obj=db.session.query(usuario).all()
+    
+    return render_template("listadeclientes.html",datos= obj)
+
+#actualizacion de Datos  Clientte
+@app.route("/upd<int:id>", methods=["GET","POST"])
 def actualizar(id):
-    obj=usuario.query.get(int(id))
-    obj.nombre="hola"
-    db.session.commit()
+    if  request.method =="GET":
+        obj=db.session.query(usuario).filter_by(ci=id).first()
+        return render_template("editarCliente.html", nombre=obj.nombre, apellido=obj.apellido,
+         ci=obj.ci, dirreccion=obj.direccion, numero=obj.numero, correo=obj.correo)
+    
+    if  request.method =="POST":
+        
+        obj=db.session.query(usuario).filter_by(ci=id).first()
+        obj.nombre=request.form.get("user_name") 
+        obj.apellido=request.form.get("user_apellido")   
+        obj.ci=request.form.get("ci")
+        obj.correo=request.form.get("user_email")    
+        obj.direccion=request.form.get("direccion")    
+        obj.numero=request.form.get("numero")
+        db.session.commit()
+        return redirect(url_for('listC'))
 
-
+#elimminado de cliente
+@app.route("/elim<int:ci>")
 def borrado_usuario(ci):
     idusuario=usuario.query.filter_by(ci=ci).first()
     db.session.query(reservas).filter(reservas.cod_usuario==idusuario.cod_usuario).delete()
     db.session.query(usuario).filter(usuario.ci== ci).delete()
     db.session.commit()
-    return 0
+    return redirect(url_for('listC'))
 
 ''' 
     borrado
