@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/inicio.css') }}" type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/gaunt.css') }}" type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}" type='text/css'>
+    <!-- Select2 CSS --> 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
+
+<!-- jQuery --> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+
+<!-- Select2 JS --> 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <title>Reservar Sala</title>
+</head>
+
+     <script type="text/javascript">
+    function GetSelectedTextValue(valor) {
+        var selectedText = valor.options[valor.selectedIndex].innerHTML;
+        var selectedValue = valor.value;
+        document.getElementById("salaschose").value=selectedValue
+    }
+    function GetSelectedTextValue2(valor) {
+        var selectedText = valor.options[valor.selectedIndex].innerHTML;
+        var selectedValue = valor.value;
+        document.getElementById("selUser").value=selectedValue
+    }
+</script>
+<script>$(document).ready(function(){
+ 
+  // Initialize select2
+  $("#selUser").select2();
+
+});</script>
+
+<body id="contenedor">
+  <div id="fon">
+    <ol  id="listas">
+    {% if nivel==1 %}
+    <li><a href="/registroU">Registrar usuario</a></li>
+
+    <li><a href="/listS">Listar Salas</a></li>
+    <li><a href="/listC">Listar Usuario</a></li>
+    <li><a  href="/reserv">Reservar Sala a Cliente </a></li>
+    <li><a href="/listR">Lista de Reservas </a></li>    
+    {% endif %}
+    {% if nivel==0 %}
+    <li><a href="listS">Listar Salas</a></li>
+   <li><a href="/reserv">Reservar Sala </a></li>
+   <li><a href="/listR">Mis Reservas </a></li>
+   {% endif %}
+   <li><a href="/">Cerrar Sesion </a></li>
+    </ol>
+</div>
+        {% with messages = get_flashed_messages() %}  
+        {% if messages %}  
+          {% for message in messages %}  
+               <h2>{{ message }}</h2>  
+          {% endfor %}  
+        {% endif %}  
+          {% endwith %}
+          {% if nivel==0 %}
+    <form action="/reserv" method="POST">
+  
+        <h1>Realizar Reserva</h1>
+        
+        <fieldset>
+          <legend><span class="number">1</span>Complete el Formulario</legend>
+          
+          <label for="start">Dia de reserva:</label>
+          <input type="date" id="start" name="fecha"
+          value="{{ fecha }}"
+          min="03-24-2010" max="03-24-2099">
+   
+
+          <label for="name">Hora de Reserva:</label>
+          <input type="time" id="name" name="horaini" value="{{ horaini }}" min="08:00" max="18:00" required>
+          
+          
+          
+          <label for="password">Hora de fin de Reserva:</label>
+          <input type="time" id="apellido" name="horafin" value="{{ horafin }}"    min="08:00" max="18:00" required>
+          <label for="mail">Sala a Reservar:</label>
+          <select id="salaschose" onchange="GetSelectedTextValue(this)" name="salaid" required>
+            <option value="" default selected>Seleccione para cambiar</option>
+            {% for j in salas %}
+            <option value={{j.cod_sala}} > Sala {{j.cod_sala}} Capacidad:{{j.capacidad}} personas</option>
+         
+          {% endfor %}
+          </select>
+          <button type="submit">Reservar</button>
+          
+        </fieldset>
+        
+        
+        
+      </form>
+      {% endif %}
+      {% if nivel==1 %}
+      <form action="/reserv" method="POST">
+  
+        <h1>Realizar Reserva</h1>
+        
+        <fieldset>
+          <legend><span class="number">1</span>Complete el Formulario</legend>
+        
+            
+           
+          <label for="password">Cliente:</label>
+
+          <select id='selUser' name="selUser" style='width: 200px;' onclick="GetSelectedTextValue2(this)" required>
+            <option value='0'>Select User</option> 
+            {% for j in usuarios %}
+                    
+            <option value="{{ j.cod_usuario }}">{{ j.nombre }} {{j.apellido}}</option> 
+           
+            {% endfor %}
+          </select>
+          <a href="/registroU">Nuevo Cliente</a>
+          <br/>
+          <div id='result' hidden></div>
+          <input type="text" id="result2" name="idusuario" hidden ></input>
+
+
+          <label for="start">Dia de reserva:</label>
+          <input type="date" id="start" name="fecha"
+          value="{{ fecha }}"
+          min="03-24-2010" max="03-24-2099">
+   
+
+          <label for="name">Hora de Reserva:</label>
+          <input type="time" id="name" name="horaini" value="{{ horaini }}" min="08:00" max="18:00" required>
+          
+          
+          
+          <label for="password">Hora de fin de Reserva:</label>
+          <input type="time" id="apellido" name="horafin" value="{{ horafin }}"    min="08:00" max="18:00" required>
+          <label for="mail">Sala a Reservar:</label>
+          <select id="salaschose" onchange="GetSelectedTextValue(this)" name="salaid" required>
+            <option value="" default selected>Seleccione para cambiar</option>
+            {% for j in salas %}
+            <option value={{j.cod_sala}} > Sala {{j.cod_sala}} Capacidad:{{j.capacidad}} personas</option>
+         
+          {% endfor %}
+          </select>
+          <button type="submit">Reservar</button>
+          
+        </fieldset>
+        
+        
+        
+      </form>
+      {% endif %}
+
+
+</body>
+</html>

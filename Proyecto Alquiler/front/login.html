@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/login.css') }}" type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/inicio.css') }}" type='text/css'>
+    <title>Login</title>
+    <script>
+    function mostrarContrasena(){
+        var tipo = document.getElementById("contrasena");
+        if(tipo.type == "password"){
+            tipo.type = "text";
+        }else{
+            tipo.type = "password";
+        }
+    }
+    
+  </script>
+  <script>function mostrarContrasena2(){
+    var tipo = document.getElementById("contran");
+    if(tipo.type == "password"){
+        tipo.type = "text";
+    }else{
+        tipo.type = "password";
+    }
+}</script>
+</head>
+
+<body id="contenedor">
+    <div class="login-wrap">
+        <div class="login-html"  >
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Iniciar Sesion</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up" ><label for="tab-2" class="tab">Registrarme</label>
+            
+            <div class="login-form">
+                
+                <div class="foot-lnk">
+                    <label for="tab-1">{{ mensaje }}</a>
+                </div>
+                <div class="sign-in-htm">
+                    <form action="/log0" method="POST">
+                    <div class="group">
+                        <label for="user" class="label">Correo</label>
+                        <input id="user" type="text" class="input" name="correo" required value="{{ correo }}">
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label">Contraseña</label>
+                        <input id="contrasena" type="password" class="input" data-type="password" name="contrasena" required value="{{ contrasena }}">
+                        
+                    </div>
+                    <div class="group">
+                        <label><input type="checkbox" id="cbox1" value="first_checkbox" onclick="mostrarContrasena()"> Ver Contraseña</label>
+                        <input type="submit" class="button" value="Iniciar Sesion">
+                    </div>
+                </form>
+                    <div class="hr"></div>
+                    
+                </div>
+                <div class="sign-up-htm" >
+                    <form action="/log1" method="POST">
+                        <label for="tab-2">{{ mensaje2 }}</a>
+                    <div class="group">
+                        <label for="user" class="label">Correo</label>
+                        <input id="user" type="email" class="input" name="correon" required value="{{ correon }}">
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label">Contraseña</label>
+                        <input id="contran" type="password" class="input" data-type="password" name="contran" required value="{{ contran }}" >
+                        
+                    </div>
+                    
+                    <div class="group">
+                        <label for="pass" class="label">Repetir Constraseña</label>
+                        <input id="pass" type="password" class="input" data-type="password" name="contran2" required>
+                    </div>
+                    <label><input type="checkbox" id="cbox1" value="first_checkbox" onclick="mostrarContrasena2()"> Ver Contraseña</label>
+                    <div class="group">
+                        <label for="pass" class="label">CI</label>
+                        <input id="pass" type="number" class="input" name="ci" required value="{{ ci }}">
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label">Nombre</label>
+                        <input id="pass" type="text" class="input" name="nombre" required value="{{ nombre }}">
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label">Apellido</label>
+                        <input id="pass" type="text" class="input" name="apellido" required value="{{ apellido }}">
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label">Direccion</label>
+                        <input id="pass" type="text" class="input" name="direccion" value="{{ direccion }}">
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label">Numero</label>
+                        <input id="pass" type="number" class="input" name="numero" value="{{ numero }}">
+                       
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Registrarme" >
+                        
+                    </div>
+                    </form>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <label for="tab-1">Ya tienes una cuenta?</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div> 
+</body>
+</html>

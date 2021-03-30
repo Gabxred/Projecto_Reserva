@@ -1,0 +1,39 @@
+
+
+
+.password-icon {
+  float: right;
+  position: relative;
+  margin: -25px 10px 0 0;
+  cursor: pointer;
+}
+  body {
+	Font-family: Cambria, Georgia, serif;
+	color: #02080c;
+	background-color: #8ddfa5;
+    padding: 100px;
+  }
+  #listas {
+   
+   background-color: #c1cbd1;
+   border-radius: 10px;
+  }
+  #listas li {
+    display:inline-block;
+   
+    font-size: 28px;
+    list-style: none;
+  }
+  #listas  li a {
+      color: rgb(3, 13, 20);
+      text-decoration: none;
+      display:block;
+      padding: 10px 10px;
+      background-color: #c1cbd1;
+  }
+  #listas  li a:hover {
+    color: rgb(32, 189, 136);
+    background-color: whitesmoke;
+    border-radius: 10px;
+}
+

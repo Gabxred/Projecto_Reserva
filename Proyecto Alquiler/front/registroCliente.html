@@ -1,0 +1,73 @@
+
+<html>
+  
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Cliente</title>
+    <!--<link rel="stylesheet" href="css/normalize.css">!-->
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}" type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/inicio.css') }}" type='text/css'>
+</head>
+<script>
+  function mostrarContrasena(){
+      var tipo = document.getElementById("contra");
+      if(tipo.type == "password"){
+          tipo.type = "text";
+      }else{
+          tipo.type = "password";
+      }
+  }
+</script>
+<body  id="contenedor">
+  <div>
+    <ol  id="listas">
+    <li><a href="/registroU">Registrar usuario</a></li>
+    <li><a>Registrar Sala nueva</a></li>
+    <li><a>Listar Salas</a></li>
+    <li><a href="/listC">Listar Usuario</a></li>
+   <li><a>Reservar Sala </a></li>
+   <li><a href="/">Cerrar Sesion</a></li>
+    </ol>
+</div>
+  <form action="/saveU" method="POST">
+  
+    <h1>Nuevo Cliente </h1>
+    {% with messages = get_flashed_messages() %}  
+    {% if messages %}  
+      {% for message in messages %}  
+           <h2>{{ message }}</h2>  
+      {% endfor %}  
+    {% endif %}  
+      {% endwith %}
+    <fieldset>
+      <legend><span class="number">1</span>Ingrese los datos:</legend>
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" name="user_name" required>
+      <label for="password">Apellido:</label>
+      <input type="text" id="apellido" name="user_apellido" required>
+      <label for="mail">CI:</label>
+      <input type="number" id="ci" name="ci" required>
+      <label for="password">Contraseña:</label>
+      <input type="password" id="contra" name="contra" required >
+     
+      <label for="mail">Verificar Contraseña:</label>
+      <input type="password" id="contra" name="contra2" required>
+      <label><input type="checkbox" id="cbox1" value="first_checkbox" onclick="mostrarContrasena()"> Ver Contraseña</label>
+      <label for="mail">Numero:</label>
+      <input type="number" id="numero" name="numero">
+      <label for="mail">Direccion:</label>
+      <input type="text" id="direccion" name="direccion">
+      <label for="mail">Correo:</label>
+      <input type="email" id="mail" name="user_email">
+      
+      
+    </fieldset>
+    
+    <button type="submit">Guardar</button>
+    
+  </form>
+  
+</body>
+</html>

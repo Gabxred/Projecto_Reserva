@@ -7,7 +7,7 @@
     <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/inicio.css') }}" type='text/css'>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}" type='text/css'>
-    <title>Lista de Clientes</title>
+    <title>Lista de Usuario</title>
 </head>
 <body id="contenedor">
     <div >
@@ -15,8 +15,9 @@
         <li><a href="/registroU">Registrar usuario</a></li>
         <li><a>Registrar Sala nueva</a></li>
         <li><a>Listar Salas</a></li>
-        <li><a href="/listC">Listar Clientes</a></li>
-       <li><a>Reservar Sala </a></li>
+        <li><a href="/listC">Listar Usuarios</a></li>
+        <li><a>Reservar Sala a Cliente </a></li>
+        <li><a>Cerrar Sesion </a></li>
         </ol>
     </div>
     <h1>Lista de Clientes</h1>
@@ -33,7 +34,7 @@
             <th>Numero</th>
             <th>Direccion</th>
             <th>Correo</th>
-            
+            <th>Nivel</th>
         
         </tr>
         <tbody>
@@ -50,6 +51,7 @@
             <td> {{ data.numero }}</td>
             <td>  {{ data.direccion }}</td>
             <td> {{ data.correo }}</td>
+            <td> {% if data.nivel==1 %} Administrador {% endif %} {% if data.nivel==0 %} Cliente {% endif %}</td>
             <td>
               <a href="/upd{{data.ci}}" method="GET">Editar</a>
               <a href="/elim{{data.ci}}"onclick="return confirm('Estas seguro de borrar este producto?');">Borrar</a>

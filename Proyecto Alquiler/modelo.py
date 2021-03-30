@@ -12,6 +12,8 @@ class usuario(db.Model):
     numero =db.Column(db.String(150))
     direccion=db.Column(db.String(150))
     correo=db.Column(db.String(150))
+    contrasena=db.Column(db.String(150))
+    nivel=db.Column(db.Integer)
     reservas = db.relationship('reservas', cascade="all,delete",backref='usuario', )
    
    

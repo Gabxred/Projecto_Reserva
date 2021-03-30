@@ -4,21 +4,39 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Form</title>
+    <title>Edicion Usuario</title>
     <!--<link rel="stylesheet" href="css/normalize.css">!-->
     <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}" type='text/css'>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/inicio.css') }}" type='text/css'>
 </head>
-
+<script>
+  function mostrarContrasena(){
+      var tipo = document.getElementById("contra");
+      if(tipo.type == "password"){
+          tipo.type = "text";
+      }else{
+          tipo.type = "password";
+      }
+  }
+</script>
 <body  id="contenedor">
-  <div>
+  <div id="fon">
     <ol  id="listas">
+    {% if nivel==1 %}
     <li><a href="/registroU">Registrar usuario</a></li>
-    <li><a>Registrar Sala nueva</a></li>
-    <li><a>Listar Salas</a></li>
-    <li><a href="/listC">Listar Clientes</a></li>
-   <li><a>Reservar Sala </a></li>
+
+    <li><a href="/listS">Listar Salas</a></li>
+    <li><a href="/listC">Listar Usuario</a></li>
+    <li><a>Reservar Sala a Cliente </a></li>
+    <li><a href="/listR">Lista de Reservas </a></li>    
+    {% endif %}
+    {% if nivel==0 %}
+    <li><a href="listS">Listar Salas</a></li>
+   <li><a href="/reserv">Reservar Sala </a></li>
+   <li><a href="/listR">Mis Reservas </a></li>
+   {% endif %}
+   <li><a href="/">Cerrar Sesion </a></li>
     </ol>
 </div>
   <form action="/upd{{ ci }}" method="POST">
@@ -26,8 +44,22 @@
     <h1>Editar Cliente:{{ nombre }}</h1>
     
     <fieldset>
-      <legend><span class="number">1</span>Ingrese los datos:</legend>
-      
+      <legend><span class="number">1</span>Ingrese los datos </legend>
+      {% with messages = get_flashed_messages() %}  
+    {% if messages %}  
+      {% for message in messages %}  
+           <h2>{{ message }}</h2>  
+      {% endfor %}  
+    {% endif %}  
+      {% endwith %}
+      <label for="cars">Nivel Usuario</label>
+
+      <select name="nivel" id="cars" value="{{ nivel }}" required>
+        <option value="" default selected>Seleccione para cambiar</option>
+        <option value="0">Cliente</option>
+        <option value="1">Administrador</option>
+      </select>
+
       <label for="name">Nombre:</label>
       <input type="text" id="name" name="user_name"  value="{{ nombre }}" required>
       
@@ -36,13 +68,18 @@
       <label for="password">Apellido:</label>
       <input type="text" id="apellido" name="user_apellido"  value="{{ apellido }}" class="input_field" required>
       <label for="mail">CI:</label>
-      <input type="text" id="ci" name="ci" value="{{ci}}" required>
+      <input type="number" id="ci" name="ci" value="{{ci}}" required>
       <label for="mail">Numero:</label>
-      <input type="text" id="numero" name="numero" value="{{ numero }}">
+      <input type="number" id="numero" name="numero" value="{{ numero }}">
       <label for="mail">Direccion:</label>
-      <input type="text" id="direccion" name="direccion" value="{{ direccion}}">
+      <input type="text" id="direccion" name="direccion" value="{{ direccion }}">
       <label for="mail">Correo:</label>
       <input type="email" id="mail" name="user_email" value="{{ correo }}">
+      <label for="mail">Contraseña:</label>
+      <input type="password" id="contra" name="contra"  value=" {{ contra }} "required>
+      <label for="mail">Verificar Contraseña:</label>
+      <input type="password" id="ci" name="contra2" required>
+      <label><input type="checkbox" id="cbox1" value="first_checkbox" onclick="mostrarContrasena()"> Ver Contraseña</label>
             
     </fieldset>
     
