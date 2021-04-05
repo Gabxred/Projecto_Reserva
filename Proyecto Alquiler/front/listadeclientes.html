@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/inicio.css') }}" type='text/css'>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}" type='text/css'>
     <title>Lista de Usuario</title>
-    <<a href="/inicio{{nivel}}"><h1 style="text-align: center;"> DATASYSTEM: PROYECTO RESERVAS </h1></a>
+    <a href="/inicio{{nivel}}"><h1 style="text-align: center;"> DATASYSTEM: PROYECTO RESERVAS </h1></a>
 </head>
 <body id="contenedor">
     <div >
@@ -36,7 +36,7 @@
       {% endfor %}  
     {% endif %}  
       {% endwith %}
-    <table class="tabla">
+    <table class="tabla" align="center">
         <tr>
               
             <th>Codigo</th>

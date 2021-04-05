@@ -407,9 +407,10 @@ def borrado_usuario(id):
 def inicio(lvl):
     now = datetime.now()
     inicio=now.hour
-    
-    reserv=reservas.query.all()
-    
+    url = "http://localhost:5000/api/reservas"
+    response = requests.get(url)
+    #reserv=reservas.query.all()
+    reserv=json.loads(response.text)
     return render_template("index.html", nivel=lvl, todo=reserv )
 
 
@@ -758,52 +759,6 @@ def api_aggreserv(id):
         return "Actualizado"
     except:
         return jsonify("error")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
