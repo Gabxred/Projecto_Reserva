@@ -8,21 +8,35 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/inicio.css') }}" type='text/css'>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}" type='text/css'>
     <title>Lista de Usuario</title>
+    <<a href="/inicio{{nivel}}"><h1 style="text-align: center;"> DATASYSTEM: PROYECTO RESERVAS </h1></a>
 </head>
 <body id="contenedor">
     <div >
         <ol  id="listas">
-        <li><a href="/registroU">Registrar usuario</a></li>
-        <li><a>Registrar Sala nueva</a></li>
-        <li><a>Listar Salas</a></li>
-        <li><a href="/listC">Listar Usuarios</a></li>
-        <li><a>Reservar Sala a Cliente </a></li>
-        <li><a>Cerrar Sesion </a></li>
+            {% if nivel==1 %}
+            <li><a href="/registroU">Registrar usuario</a></li>
+    
+            <li><a href="/listS">Listar Salas</a></li>
+            <li><a href="/listC">Listar Usuario</a></li>
+            <li><a href="/reserv">Reservar Sala a Cliente </a></li>
+            <li><a href="/listR">Lista de Reservas </a></li>    
+            {% endif %}
+            {% if nivel==0 %}
+           <li><a href="/reserv">Reservar Sala </a></li>
+           <li><a href="/listR">Mis Reservas </a></li>
+           {% endif %}
+           <li><a href="/">Cerrar Sesion </a></li>
         </ol>
     </div>
     <h1>Lista de Clientes</h1>
-    
-    <table>
+    {% with messages = get_flashed_messages() %}  
+    {% if messages %}  
+      {% for message in messages %}  
+           <h2>{{ message }}</h2>  
+      {% endfor %}  
+    {% endif %}  
+      {% endwith %}
+    <table class="tabla">
         <tr>
               
             <th>Codigo</th>
@@ -53,8 +67,10 @@
             <td> {{ data.correo }}</td>
             <td> {% if data.nivel==1 %} Administrador {% endif %} {% if data.nivel==0 %} Cliente {% endif %}</td>
             <td>
-              <a href="/upd{{data.ci}}" method="GET">Editar</a>
-              <a href="/elim{{data.ci}}"onclick="return confirm('Estas seguro de borrar este producto?');">Borrar</a>
+              <a href="/upd{{data.cod_usuario}}" method="GET">Editar</a>
+              <form action="/elimC/{{ data.cod_usuario }}" method="post">
+              <button  onclick="return confirm('Estas seguro de borrar este Usuario?');">Borrar</button>
+            </form>
             </td>
            
             </tr>

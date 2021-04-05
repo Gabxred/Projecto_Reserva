@@ -6,9 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/inicio.css') }}" type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles/gaunt.css') }}" type='text/css'>
+    <!--<link rel="stylesheet" href="{{ url_for('static',filename='styles/gaunt.css') }}" type='text/css'>-->
     <title>Inicio</title>
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js"></script>
+    <a href="/inicio{{nivel}}"><h1 style="text-align: center;"> DATASYSTEM: PROYECTO RESERVAS </h1></a>
 </head>
+<style type="text/css">
+
+    #calendar {
+
+        background-color: rgba(82, 230, 63, 0.534);
+        
+
+    }
+
+</style>
+
 <body id="contenedor">
     <div id="fon">
         <ol  id="listas">
@@ -21,45 +35,33 @@
         <li><a href="/listR">Lista de Reservas </a></li>    
         {% endif %}
         {% if nivel==0 %}
-        <li><a href="listS">Listar Salas</a></li>
        <li><a href="/reserv">Reservar Sala </a></li>
        <li><a href="/listR">Mis Reservas </a></li>
        {% endif %}
        <li><a href="/">Cerrar Sesion </a></li>
         </ol>
     </div>
-    <div class="contenedorTabla">
-        <div class="chart">
-            <div class="chart-row chart-period">
-                <div class="chart-row-item">Salas</div>
-                {% for item in  range( hora,19 ) %}
-                    <span>{{ item  }}:00</span>  
-                {% endfor %}
-
+    <div id="calendar"></div>
+        <script>
+            let calendarEl= document.getElementById('calendar');
+            let calendar= new FullCalendar.Calendar(calendarEl,{
+                height: 700,
+                events:[ 
+                    {% for x in todo %}
+                    {   
+                        title: 'Sala:{{x.cod_sala}}({{x.horario_inicio}} a {{x.horario_fin}})',
+                        start: '{{x.fecha}}',
+                        color:'green',
+                    },
+                    
+                    {% endfor %}
+                ]
                 
-            </div>
-            <div class="chart-row chart-lines">
-              <span></span>
-            </div>
-            <!--asdas-->
-            <div class="chart-row">
-                {% for item in salas %}
-                    
-                    <div class="chart-row-item">{{ item.cod_sala }}</div>
-
-                    <ul class="chart-row-bars"> 
-                    <li class="chart-li-uno">Planning</li>
-                       <div class="chart-row"></div>
-                    
-                    
-                    <li class="chart-li-dos">Planning</li>
-                    </ul>
-                {% endfor %}
-              
-            </div>
-            
-          </div>
-
-    </div>
+            });
+            calendar.render();
+        </script>
+    
+    
+    
 </body>
 </html>

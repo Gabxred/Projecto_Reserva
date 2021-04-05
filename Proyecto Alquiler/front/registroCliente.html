@@ -9,6 +9,7 @@
     <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}" type='text/css'>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/inicio.css') }}" type='text/css'>
+    <a href="/inicio{{nivel}}"><h1 style="text-align: center;"> DATASYSTEM: PROYECTO RESERVAS </h1></a>
 </head>
 <script>
   function mostrarContrasena(){
@@ -23,12 +24,19 @@
 <body  id="contenedor">
   <div>
     <ol  id="listas">
-    <li><a href="/registroU">Registrar usuario</a></li>
-    <li><a>Registrar Sala nueva</a></li>
-    <li><a>Listar Salas</a></li>
-    <li><a href="/listC">Listar Usuario</a></li>
-   <li><a>Reservar Sala </a></li>
-   <li><a href="/">Cerrar Sesion</a></li>
+      {% if nivel==1 %}
+      <li><a href="/registroU">Registrar usuario</a></li>
+
+      <li><a href="/listS">Listar Salas</a></li>
+      <li><a href="/listC">Listar Usuario</a></li>
+      <li><a href="/reserv">Reservar Sala a Cliente </a></li>
+      <li><a href="/listR">Lista de Reservas </a></li>    
+      {% endif %}
+      {% if nivel==0 %}
+     <li><a href="/reserv">Reservar Sala </a></li>
+     <li><a href="/listR">Mis Reservas </a></li>
+     {% endif %}
+     <li><a href="/">Cerrar Sesion </a></li>
     </ol>
 </div>
   <form action="/saveU" method="POST">
@@ -44,23 +52,23 @@
     <fieldset>
       <legend><span class="number">1</span>Ingrese los datos:</legend>
       <label for="name">Nombre:</label>
-      <input type="text" id="name" name="user_name" required>
+      <input type="text" id="name" name="user_name" value="{{ nombre }}" required>
       <label for="password">Apellido:</label>
-      <input type="text" id="apellido" name="user_apellido" required>
+      <input type="text" id="apellido" name="user_apellido" value="{{ apellido }}"required>
       <label for="mail">CI:</label>
-      <input type="number" id="ci" name="ci" required>
+      <input type="number" id="ci" name="ci" value="{{ ci }}" required>
       <label for="password">Contraseña:</label>
-      <input type="password" id="contra" name="contra" required >
+      <input type="password" id="contra" name="contra" value="{{ contra }}"required >
      
       <label for="mail">Verificar Contraseña:</label>
       <input type="password" id="contra" name="contra2" required>
       <label><input type="checkbox" id="cbox1" value="first_checkbox" onclick="mostrarContrasena()"> Ver Contraseña</label>
       <label for="mail">Numero:</label>
-      <input type="number" id="numero" name="numero">
+      <input type="number" id="numero" name="numero" value="{{ numero }}">
       <label for="mail">Direccion:</label>
-      <input type="text" id="direccion" name="direccion">
+      <input type="text" id="direccion" name="direccion" value="{{ direccion }}">
       <label for="mail">Correo:</label>
-      <input type="email" id="mail" name="user_email">
+      <input type="email" id="mail" name="user_email" value="{{ correo }}">
       
       
     </fieldset>

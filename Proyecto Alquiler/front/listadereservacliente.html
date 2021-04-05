@@ -8,28 +8,37 @@
     <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/gaunt.css') }}" type='text/css'>
     <title>Inicio</title>
+    <a href="/inicio{{nivel}}"><h1 style="text-align: center;"> DATASYSTEM: PROYECTO RESERVAS </h1></a>
 </head>
 <body id="contenedor">
     <div id="fon">
         <ol  id="listas">
-        {% if nivel==1 %}
-        <li><a href="/registroU">Registrar usuario</a></li>
-
-        <li><a href="/listS">Listar Salas</a></li>
-        <li><a href="/listC">Listar Usuario</a></li>
-        <li><a>Reservar Sala a Cliente </a></li>
-        <li><a href="/listR">Lista de Reservas </a></li>    
-        {% endif %}
-        {% if nivel==0 %}
-        <li><a href="listS">Listar Salas</a></li>
-       <li><a href="/reserv">Reservar Sala </a></li>
-       <li><a href="/listR">Mis Reservas </a></li>
-       {% endif %}
-       <li><a href="/">Cerrar Sesion </a></li>
+            {% if nivel==1 %}
+            <li><a href="/registroU">Registrar usuario</a></li>
+    
+            <li><a href="/listS">Listar Salas</a></li>
+            <li><a href="/listC">Listar Usuario</a></li>
+            <li><a href="/reserv">Reservar Sala a Cliente </a></li>
+            <li><a href="/listR">Lista de Reservas </a></li>    
+            {% endif %}
+            {% if nivel==0 %}
+           <li><a href="/reserv">Reservar Sala </a></li>
+           <li><a href="/listR">Mis Reservas </a></li>
+           {% endif %}
+           <li><a href="/">Cerrar Sesion </a></li>
         </ol>
     </div>
+    
+    {% with messages = get_flashed_messages() %}  
+    {% if messages %}  
+      {% for message in messages %}  
+           <h2>{{ message }}</h2>  
+      {% endfor %}  
+    {% endif %}  
+      {% endwith %}
     {% if nivel==0 %}
-    <table>
+    <table class="tabla">
+      <h1>Lista de Reservas</h1>
         <tr>
               
             <th>Codigo Reserva</th>
@@ -67,7 +76,8 @@
     {% endif %}
 
     {% if nivel==1 %}
-    <table>
+    <table class="tabla">
+      <h1>Lista de Reservas</h1>
         <tr>
               
             <th>Codigo Reserva</th>
@@ -85,20 +95,22 @@
             {% for data in datos2 %}
         
             <tr>
-            <td>  {{ data.reservas.cod_reserva }}</td>
+            <td>  {{ data.cod_reserva }}</td>
         
-            <td>  {{ data.reservas.cod_sala }}</td>
+            <td>  {{ data.cod_sala }}</td>
                 
-            <td>  {{ data.usuario.nombre }} {{ data.usuario.apellido}}</td>
-            <td>  {{ data.reservas.fecha }}</td>
+            <td>  {{ data.nombre }} {{ data.apellido}}</td>
+            <td>  {{ data.fecha }}</td>
         
-            <td>  {{ data.reservas.horario_inicio }}</td>
-            <td> {{ data.reservas.horario_fin }}</td>
+            <td>  {{ data.horario_inicio }}</td>
+            <td> {{ data.horario_fin }}</td>
             
             
             <td>
-              <a href="/editR{{ data.reservas.cod_reserva }}" method="GET">Editar</a>
-              <a href="/elimR/{{ data.reservas.cod_reserva }}" onclick="return confirm('Estas seguro de cancelar reserva del cliente?');">Cancelar Reserva</a>
+              <a href="/editR{{ data.cod_reserva }}" method="GET">Editar</a>
+              <form action="/elimR/{{ data.cod_reserva }}" method="POST">
+                <button  type="submit" onclick="return confirm('Estas seguro de cancelar reserva del cliente?');">Cancelar Reserva</button>
+                </form>
             </td>
            
             </tr>

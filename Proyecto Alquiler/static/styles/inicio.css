@@ -1,5 +1,24 @@
-
-
+.tabla th,td{
+	color: white;
+	border: #000000;
+	border:  2px solid ;
+}
+.tabla th {
+	background-color: #0ea315;
+}
+.tabla h2{
+	font-size: 50px;
+}
+.tabla td{
+	width: 130px;
+	height: 140px;
+  background-color: #64cc87;
+  opacity: 0.6;
+}
+.tabla center {
+  margin-left: auto; 
+  margin-right: auto;
+}
 
 .password-icon {
   float: right;

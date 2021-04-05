@@ -16,6 +16,7 @@
 <!-- Select2 JS --> 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <title>Reservar Sala</title>
+    <a href="/inicio{{nivel}}"><h1 style="text-align: center;"> DATASYSTEM: PROYECTO RESERVAS </h1></a>
 </head>
 
      <script type="text/javascript">
@@ -41,20 +42,19 @@
   
   <div id="fon">
     <ol  id="listas">
-    {% if nivel==1 %}
-    <li><a href="/registroU">Registrar usuario</a></li>
+      {% if nivel==1 %}
+      <li><a href="/registroU">Registrar usuario</a></li>
 
-    <li><a href="/listS">Listar Salas</a></li>
-    <li><a href="/listC">Listar Usuario</a></li>
-    <li><a  href="/reserv">Reservar Sala a Cliente </a></li>
-    <li><a href="/listR">Lista de Reservas </a></li>    
-    {% endif %}
-    {% if nivel==0 %}
-    <li><a href="listS">Listar Salas</a></li>
-   <li><a href="/reserv">Reservar Sala </a></li>
-   <li><a href="/listR">Mis Reservas </a></li>
-   {% endif %}
-   <li><a href="/">Cerrar Sesion </a></li>
+      <li><a href="/listS">Listar Salas</a></li>
+      <li><a href="/listC">Listar Usuario</a></li>
+      <li><a href="/reserv">Reservar Sala a Cliente </a></li>
+      <li><a href="/listR">Lista de Reservas </a></li>    
+      {% endif %}
+      {% if nivel==0 %}
+     <li><a href="/reserv">Reservar Sala </a></li>
+     <li><a href="/listR">Mis Reservas </a></li>
+     {% endif %}
+     <li><a href="/">Cerrar Sesion </a></li>
     </ol>
 </div>
         {% with messages = get_flashed_messages() %}  
@@ -65,7 +65,7 @@
         {% endif %}  
           {% endwith %}
   {% if nivel==0 %}
-    <form action="/editR{{idreserv}}" method="POST">
+    <form action="/editR{{ idreserv }}" method="POST">
   
         <h1>Editar Reserva</h1>
         

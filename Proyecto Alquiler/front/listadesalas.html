@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/inicio.css') }}" type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles/gaunt.css') }}" type='text/css'>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css') }}" type='text/css'>
+    <a href="/inicio{{nivel}}"><h1 style="text-align: center;"> DATASYSTEM: PROYECTO RESERVAS </h1></a>
     <title>Lista de Salas</title>
     <script type="text/javascript">	
     function ActivarCampoOtroTema(){		
@@ -15,39 +15,42 @@
     		contenedor.style.display = "block";	
             	return true;	}
     </script>
+    <a href="/inicio{{nivel}}"><h1 style="text-align: center;"> PROYECTO RESERVAS </h1></a>
 </head>
 <body id="contenedor">
     
   <div id="fon">
     <ol  id="listas">
-    {% if nivel==1 %}
-    <li><a href="/registroU">Registrar usuario</a></li>
+      {% if nivel==1 %}
+      <li><a href="/registroU">Registrar usuario</a></li>
 
-    <li><a href="/listS">Listar Salas</a></li>
-    <li><a href="/listC">Listar Usuario</a></li>
-    <li><a>Reservar Sala a Cliente </a></li>
-    <li><a href="/listR">Lista de Reservas </a></li>    
-    {% endif %}
-    {% if nivel==0 %}
-    <li><a href="listS">Listar Salas</a></li>
-   <li><a href="/reserv">Reservar Sala </a></li>
-   <li><a href="/listR">Mis Reservas </a></li>
-   {% endif %}
-   <li><a href="/">Cerrar Sesion </a></li>
+      <li><a href="/listS">Listar Salas</a></li>
+      <li><a href="/listC">Listar Usuario</a></li>
+      <li><a href="/reserv">Reservar Sala a Cliente </a></li>
+      <li><a href="/listR">Lista de Reservas </a></li>    
+      {% endif %}
+      {% if nivel==0 %}
+     <li><a href="/reserv">Reservar Sala </a></li>
+     <li><a href="/listR">Mis Reservas </a></li>
+     {% endif %}
+     <li><a href="/">Cerrar Sesion </a></li>
     </ol>
 </div>
     {% if nivel==1 %}
-    <button onclick="ActivarCampoOtroTema()">Nueva sala</button>
+    
     {% endif %}
-    <table>
-     <h1> Lista de Salas</h1>
-     {% with messages = get_flashed_messages() %}  
-     {% if messages %}  
-       {% for message in messages %}  
-            <h2>{{ message }}</h2>  
-       {% endfor %}  
-     {% endif %}  
-       {% endwith %}
+
+    {% with messages = get_flashed_messages() %}  
+    {% if messages %}  
+      {% for message in messages %}  
+           <h2>{{ message }}</h2>  
+      {% endfor %}  
+    {% endif %}  
+      {% endwith %}
+    <table class="tabla" align="center">
+      <h1> Lista de Salas</h1>
+      <button onclick="ActivarCampoOtroTema()">Nueva sala</button>
+    
         <tr>
               
             <th>Codigo</th>
@@ -73,14 +76,11 @@
             <td>
 
                 <button>editar</button>
-                
-                <button href="/elimS{{ data.cod_sala }}"onclick="return confirm('Estas seguro de borrar este producto?');">Borrar</button>
-                </form>
+              </form>
+              <form action="/elimS{{ data.cod_sala }}" method="POST">
+                <button  type="submit" onclick="return confirm('Estas seguro de borrar este producto?');">Borrar</button>
+              </form>
                 {% endif %}
-                {% if nivel==0 %}
-                <a href="" method="GET">Reservar</a>
-                 
-             {% endif %}
             </td>
            
             </tr>
@@ -100,7 +100,7 @@
               
             </fieldset>
             
-            <button type="submit">Guardar</button>
+            <button  type="submit">Guardar</button>
             
           </form>
         

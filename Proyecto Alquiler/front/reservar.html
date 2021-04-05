@@ -16,6 +16,7 @@
 <!-- Select2 JS --> 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <title>Reservar Sala</title>
+    <a href="/inicio{{nivel}}"><h1 style="text-align: center;"> DATASYSTEM: PROYECTO RESERVAS </h1></a>
 </head>
 
      <script type="text/javascript">
@@ -40,20 +41,19 @@
 <body id="contenedor">
   <div id="fon">
     <ol  id="listas">
-    {% if nivel==1 %}
-    <li><a href="/registroU">Registrar usuario</a></li>
+      {% if nivel==1 %}
+      <li><a href="/registroU">Registrar usuario</a></li>
 
-    <li><a href="/listS">Listar Salas</a></li>
-    <li><a href="/listC">Listar Usuario</a></li>
-    <li><a  href="/reserv">Reservar Sala a Cliente </a></li>
-    <li><a href="/listR">Lista de Reservas </a></li>    
-    {% endif %}
-    {% if nivel==0 %}
-    <li><a href="listS">Listar Salas</a></li>
-   <li><a href="/reserv">Reservar Sala </a></li>
-   <li><a href="/listR">Mis Reservas </a></li>
-   {% endif %}
-   <li><a href="/">Cerrar Sesion </a></li>
+      <li><a href="/listS">Listar Salas</a></li>
+      <li><a href="/listC">Listar Usuario</a></li>
+      <li><a href="/reserv">Reservar Sala a Cliente </a></li>
+      <li><a href="/listR">Lista de Reservas </a></li>    
+      {% endif %}
+      {% if nivel==0 %}
+     <li><a href="/reserv">Reservar Sala </a></li>
+     <li><a href="/listR">Mis Reservas </a></li>
+     {% endif %}
+     <li><a href="/">Cerrar Sesion </a></li>
     </ol>
 </div>
         {% with messages = get_flashed_messages() %}  
@@ -74,7 +74,7 @@
           <label for="start">Dia de reserva:</label>
           <input type="date" id="start" name="fecha"
           value="{{ fecha }}"
-          min="03-24-2010" max="03-24-2099">
+          min="03-24-2015" max="03-24-2099">
    
 
           <label for="name">Hora de Reserva:</label>
@@ -129,7 +129,7 @@
           <label for="start">Dia de reserva:</label>
           <input type="date" id="start" name="fecha"
           value="{{ fecha }}"
-          min="03-24-2010" max="03-24-2099">
+          min="03-24-2015" max="03-24-2099">
    
 
           <label for="name">Hora de Reserva:</label>
